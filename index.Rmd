@@ -1,0 +1,65 @@
+---
+title       : Slidify Project - Practical Machine Learning class 
+subtitle    : Picturing of Shiny demonstration application.
+author      : Gianfranco Campana
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+### Application to show the correlation between Petal.Length and other explanatory varibles.
+
+First, Iris dataset is loaded: 
+```{r}
+data(iris)
+str(iris)
+```
+As you can see Species variable is factor, while the others are numeric... 
+
+--- .class #id 
+```{r}
+
+```
+
+### Input parameter
+
+Next, in the Ui.R file, we set the parameters accepted as input, in form of a list: 
+
+```{r}
+names(list("species" = "Species", "petal with" = "Petal.Width", "sepal length" = "Sepal.Length", 
+           "sepal with" = "Sepal.Width"))
+
+```
+and a variable named speciesplot needed to handle the plotting by the "server" side. The corresponding html tag is generated:
+```{r}
+library(shiny); p <- plotOutput("speciesplot"); print(p)
+```
+
+--- .class #id 
+
+### Server side :
+
+Into the server file, we define a reactive function to read the input variable and build the string used for plotting. 
+
+```{r}
+shinyServer(function(input, output) {
+  
+  formulaText <- reactive({
+    paste("Petal.Length ~ ", input$explanatoryvariable)
+  })})
+```
+
+--- .class #id 
+
+### Result :
+Last, the plot command is called using the string containing the response variable and the explanatory variable already setted:
+```{r, eval = F}
+plot(as.formula(formulaText()),  data = iris)
+```
+
+<div><img src="./assets/img/img.jpg"></div>
+
