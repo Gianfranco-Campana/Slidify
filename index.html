@@ -99,11 +99,20 @@ str(iris)
   <article data-timings="">
     <p>Into the server file, we define a reactive function to read the input variable and build the string used for plotting. </p>
 
-<pre><code class="r">shinyServer(function(input, output) {
+<pre><code class="r">shinyServer(function(input, output) { formulaText &lt;- reactive({
+    paste(&quot;Petal.Length ~ &quot;, input$explanatoryvariable) })})
+</code></pre>
 
-  formulaText &lt;- reactive({
-    paste(&quot;Petal.Length ~ &quot;, input$explanatoryvariable)
-  })})
+<p>In addiction, a linear model is printed. It is builded interactively on the two variables of interest. The App show the linear model R code, and the relative coefficients:&quot;</p>
+
+<pre><code class=", eval = F">formulaText1 &lt;- reactive({
+    paste(&quot;lm(Petal.Length ~ &quot;, input$explanatoryvariable, &quot;, data=iris)&quot;)
+  })
+  output$lm &lt;- ({  renderText(formulaText1() )})  
+
+  formulaText2 &lt;- reactive({
+    eval(parse(text=paste(&quot;lm(Petal.Length ~ &quot;, input$explanatoryvariable, &quot;, data=iris)&quot;)))$coef
+  })
 </code></pre>
 
   </article>
@@ -115,7 +124,7 @@ str(iris)
     <h3>Result :</h3>
   </hgroup>
   <article data-timings="">
-    <p>Last, the plot command is called using the string containing the response variable and the explanatory variable already setted:</p>
+    <p>The plot command is called using the string containing the response variable and the explanatory variable already setted:</p>
 
 <pre><code class="r">plot(as.formula(formulaText()),  data = iris)
 </code></pre>

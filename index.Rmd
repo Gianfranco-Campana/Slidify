@@ -44,19 +44,28 @@ library(shiny); p <- plotOutput("speciesplot"); print(p)
 ### Server side :
 
 Into the server file, we define a reactive function to read the input variable and build the string used for plotting. 
-
 ```{r}
-shinyServer(function(input, output) {
-  
-  formulaText <- reactive({
-    paste("Petal.Length ~ ", input$explanatoryvariable)
-  })})
+shinyServer(function(input, output) { formulaText <- reactive({
+    paste("Petal.Length ~ ", input$explanatoryvariable) })})
 ```
+In addiction, a linear model is printed. It is builded interactively on the two variables of interest. The App show the linear model R code, and the relative coefficients:"
+
+```{, eval = F}
+formulaText1 <- reactive({
+    paste("lm(Petal.Length ~ ", input$explanatoryvariable, ", data=iris)")
+  })
+  output$lm <- ({  renderText(formulaText1() )})  
+
+  formulaText2 <- reactive({
+    eval(parse(text=paste("lm(Petal.Length ~ ", input$explanatoryvariable, ", data=iris)")))$coef
+  })
+```
+
 
 --- .class #id 
 
 ### Result :
-Last, the plot command is called using the string containing the response variable and the explanatory variable already setted:
+The plot command is called using the string containing the response variable and the explanatory variable already setted:
 ```{r, eval = F}
 plot(as.formula(formulaText()),  data = iris)
 ```
