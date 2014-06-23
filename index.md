@@ -82,12 +82,11 @@ formulaText1 <- reactive({
 
 --- .class #id 
 
-### Result :
+#### Result :
 The plot command is called using the string containing the response variable and the explanatory variable and value already selected: the prediction from the linear model fitted is plotted over the data plot:
 
 ```r
 plot(as.formula(formulaText()),  data = iris)
 ```
-
 <div><img src="./assets/img/img.jpg"></div>
 
