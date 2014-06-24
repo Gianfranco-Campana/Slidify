@@ -66,7 +66,7 @@ Into the server file, we define a reactive function to read the input variable a
 shinyServer(function(input, output) { formulaText <- reactive({
     paste("Petal.Length ~ ", input$explanatoryvariable) })})
 ```
-A linear model is printed. It is builded interactively on the two variables of interest. The App show the linear model R code, and the relative coefficients. Furthermore, from the interactive bar (only for numerical variables) is possible to select a value for the explanatory variable: this value is used to predict the Petal Length using the linear model fitted, and the corresponding prediction is plotted over the same plot.
+A linear model is printed. It is builded interactively on the two variables of interest. The App show the linear model R code, and the relative coefficients. Furthermore, from the interactive bar (only for numerical variables) is possible to select a value for the explanatory variable: this value is used to predict the Petal Length using the linear model fitted, and the corresponding predicted value is plotted over the same plot.
 
 ```{, eval = F}
 formulaText1 <- reactive({

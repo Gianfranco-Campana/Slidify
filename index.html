@@ -103,7 +103,7 @@ str(iris)
     paste(&quot;Petal.Length ~ &quot;, input$explanatoryvariable) })})
 </code></pre>
 
-<p>A linear model is printed. It is builded interactively on the two variables of interest. The App show the linear model R code, and the relative coefficients. Furthermore, from the interactive bar (only for numerical variables) is possible to select a value for the explanatory variable: this value is used to predict the Petal Length using the linear model fitted, and the corresponding prediction is plotted over the same plot.</p>
+<p>A linear model is printed. It is builded interactively on the two variables of interest. The App show the linear model R code, and the relative coefficients. Furthermore, from the interactive bar (only for numerical variables) is possible to select a value for the explanatory variable: this value is used to predict the Petal Length using the linear model fitted, and the corresponding predicted value is plotted over the same plot.</p>
 
 <pre><code class=", eval = F">formulaText1 &lt;- reactive({
     paste(&quot;lm(Petal.Length ~ &quot;, input$explanatoryvariable, &quot;, data=iris)&quot;)
