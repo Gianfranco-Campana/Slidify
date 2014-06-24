@@ -1,5 +1,5 @@
 ---
-title       : Slidify Project - Practical Machine Learning class 
+title       : Slidify Project - Developing Data Products class 
 subtitle    : Picturing of Shiny demonstration application.
 author      : Gianfranco Campana
 job         : 
